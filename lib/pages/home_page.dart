@@ -1,5 +1,6 @@
 import 'package:codigo6_qr/pages/scanner_page.dart';
 import 'package:codigo6_qr/ui/general/colors.dart';
+import 'package:codigo6_qr/ui/widgets/common_button_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -39,29 +40,9 @@ class HomePage extends StatelessWidget {
                 "assets/images/qr.png",
                 width: width * 0.80,
               ),
-              SizedBox(
-                width: double.infinity,
-                height: 48.0,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ScannerPage()));
-                  },
-                  child: Text(
-                    "Escanear QR",
-                    style: TextStyle(
-                      color: kBrandSecondaryColor,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: kBrandPrimaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14.0),
-                    ),
-                  ),
-                ),
+              CommonButtonWidget(
+                onPressed: () {},
+                text: "Escanear QR",
               ),
               const SizedBox(
                 height: 12.0,
