@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:codigo6_qr/pages/register_page.dart';
 import 'package:codigo6_qr/ui/general/colors.dart';
 import 'package:codigo6_qr/ui/widgets/common_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -115,7 +116,14 @@ class _ScannerPageState extends State<ScannerPage> {
                     height: 10.0,
                   ),
                   CommonButtonWidget(
-                    onPressed: () {},
+                    onPressed: !urlData.isNotEmpty
+                        ? () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RegisterPage()));
+                          }
+                        : null,
                     text: "Registrar",
                   ),
                 ],
