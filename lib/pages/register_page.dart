@@ -1,7 +1,9 @@
+import 'package:codigo6_qr/models/qr_model.dart';
 import 'package:codigo6_qr/ui/general/colors.dart';
 import 'package:codigo6_qr/ui/widgets/common_button_widget.dart';
 import 'package:codigo6_qr/ui/widgets/common_texfield_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -77,7 +79,19 @@ class RegisterPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: CommonButtonWidget(
-                onPressed: () {},
+                onPressed: () {
+                  DateFormat myFormat = DateFormat("dd/MM/yyyy hh:mm");
+                  String myDate = myFormat.format(DateTime.now());
+
+                  QRModel mantequilla = QRModel.fromJson(
+                    {
+                      "title": "La esquina",
+                      "observation": "Restaurant",
+                      "url": "http:///",
+                      "datetime": myDate,
+                    },
+                  );
+                },
                 text: "Guardar",
               ),
             ),
