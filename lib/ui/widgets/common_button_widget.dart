@@ -2,7 +2,7 @@ import 'package:codigo6_qr/ui/general/colors.dart';
 import 'package:flutter/material.dart';
 
 class CommonButtonWidget extends StatelessWidget {
-  Function onPressed;
+  Function? onPressed;
   String text;
 
   CommonButtonWidget({
@@ -16,9 +16,11 @@ class CommonButtonWidget extends StatelessWidget {
       width: double.infinity,
       height: 48.0,
       child: ElevatedButton(
-        onPressed: () {
-          onPressed();
-        },
+        onPressed: onPressed != null
+            ? () {
+                onPressed!();
+              }
+            : null,
         child: Text(
           text,
           style: TextStyle(

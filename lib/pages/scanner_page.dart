@@ -14,6 +14,8 @@ class _ScannerPageState extends State<ScannerPage> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
+  String urlData = "";
+
   @override
   void reassemble() {
     super.reassemble();
@@ -40,8 +42,9 @@ class _ScannerPageState extends State<ScannerPage> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
-        if (result != null) {
+        if (result != null && result!.code != null) {
           print("XXXXXXXXXXXXXXXX: ${result!.code}");
+          urlData = result!.code!;
         }
       });
     });
@@ -83,7 +86,7 @@ class _ScannerPageState extends State<ScannerPage> {
         children: [
           Expanded(
             flex: 4,
-            // child: _buildQrView(context),
+            //child: _buildQrView(context),
             child: SizedBox(),
           ),
           Expanded(
@@ -96,8 +99,9 @@ class _ScannerPageState extends State<ScannerPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Buenos dias",
-                    //"Por favor escanea un código QR.",
+                    urlData.isEmpty
+                        ? "Por favor escanea un código QR."
+                        : urlData,
                     //"https://cdn.flow.page/images/6e4e6cd4-92dd-4ef9-909d-2ad1db97a4b8-pdf?m=1674231596",
                     maxLines: 2,
                     textAlign: TextAlign.center,
