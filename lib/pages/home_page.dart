@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(28.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
                 "SaveQR",
@@ -41,7 +42,10 @@ class HomePage extends StatelessWidget {
                 width: width * 0.80,
               ),
               CommonButtonWidget(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ScannerPage()));
+                },
                 text: "Escanear QR",
               ),
               const SizedBox(

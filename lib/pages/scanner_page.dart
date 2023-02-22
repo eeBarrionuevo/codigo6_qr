@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:codigo6_qr/ui/general/colors.dart';
+import 'package:codigo6_qr/ui/widgets/common_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -88,39 +89,25 @@ class _ScannerPageState extends State<ScannerPage> {
           Expanded(
             flex: 1,
             child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 18.0),
               width: double.infinity,
-              color: Colors.amber,
+              // color: Colors.amber,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "Por favor escanea un código QR.",
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 48.0,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ScannerPage()));
-                      },
-                      child: Text(
-                        "Registra ahora",
-                        style: TextStyle(
-                          color: kBrandSecondaryColor,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: kBrandPrimaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14.0),
-                        ),
-                      ),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
                     ),
+                  ),
+                  const SizedBox(
+                    height: 6.0,
+                  ),
+                  CommonButtonWidget(
+                    onPressed: () {},
+                    text: "Registrar",
                   ),
                 ],
               ),
