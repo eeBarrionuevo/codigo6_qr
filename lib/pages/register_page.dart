@@ -7,7 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _observationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +45,14 @@ class RegisterPage extends StatelessWidget {
                     ),
                     CommonTextFieldWidget(
                       hintText: "Ingresa un título...",
+                      controller: _titleController,
                     ),
                     SizedBox(
                       height: 16.0,
                     ),
                     CommonTextFieldWidget(
                       hintText: "Ingresa una observación...",
+                      controller: _observationController,
                     ),
                     SizedBox(
                       height: 20.0,
@@ -85,12 +88,13 @@ class RegisterPage extends StatelessWidget {
 
                   QRModel mantequilla = QRModel.fromJson(
                     {
-                      "title": "La esquina",
-                      "observation": "Restaurant",
+                      "title": _titleController.text,
+                      "observation": _observationController.text,
                       "url": "http:///",
                       "datetime": myDate,
                     },
                   );
+                  print(mantequilla.toJson());
                 },
                 text: "Guardar",
               ),
