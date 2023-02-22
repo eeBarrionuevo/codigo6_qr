@@ -96,7 +96,7 @@ class _ScannerPageState extends State<ScannerPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Hola",
+                    "Buenos dias",
                     //"Por favor escanea un código QR.",
                     //"https://cdn.flow.page/images/6e4e6cd4-92dd-4ef9-909d-2ad1db97a4b8-pdf?m=1674231596",
                     maxLines: 2,
