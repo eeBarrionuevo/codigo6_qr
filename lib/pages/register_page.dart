@@ -11,6 +11,7 @@ class RegisterPage extends StatelessWidget {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _observationController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +64,7 @@ class RegisterPage extends StatelessWidget {
                         height: 20.0,
                       ),
                       Container(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16.0),
@@ -89,18 +90,35 @@ class RegisterPage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: CommonButtonWidget(
                 onPressed: () {
-                  DateFormat myFormat = DateFormat("dd/MM/yyyy hh:mm");
-                  String myDate = myFormat.format(DateTime.now());
+                  if (_formKey.currentState!.validate()) {
+                    DateFormat myFormat = DateFormat("dd/MM/yyyy hh:mm");
+                    String myDate = myFormat.format(DateTime.now());
 
-                  QRModel mantequilla = QRModel(
-                    title: _titleController.text,
-                    observation: _observationController.text,
-                    url: "http://",
-                    datetime: myDate,
-                  );
-                  // DBAdmin().insertQR(mantequilla);
-
-                  if (_formKey.currentState!.validate()) {}
+                    QRModel mantequilla = QRModel(
+                      title: _titleController.text,
+                      observation: _observationController.text,
+                      url: "http://",
+                      datetime: myDate,
+                    );
+                    DBAdmin().insertQR(mantequilla).then((value) {
+                      if (value >= 0) {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        //Mostrar un snackbar
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: const Color(0xffbc00dd),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.0),
+                            ),
+                            behavior: SnackBarBehavior.floating,
+                            content:
+                                const Text("Se registró tu QR correctamente."),
+                          ),
+                        );
+                      }
+                    });
+                  }
                 },
                 text: "Guardar",
               ),
