@@ -1,3 +1,4 @@
+import 'package:codigo6_qr/pages/history_page.dart';
 import 'package:codigo6_qr/pages/scanner_page.dart';
 import 'package:codigo6_qr/ui/general/colors.dart';
 import 'package:codigo6_qr/ui/widgets/common_button_widget.dart';
@@ -52,7 +53,10 @@ class HomePage extends StatelessWidget {
                 height: 12.0,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HistoryPage()));
+                },
                 child: Text(
                   "Ver historial",
                   style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:codigo6_qr/db/db_admin.dart';
 import 'package:codigo6_qr/models/qr_model.dart';
+import 'package:codigo6_qr/pages/home_page.dart';
 import 'package:codigo6_qr/ui/general/colors.dart';
 import 'package:codigo6_qr/ui/widgets/common_button_widget.dart';
 import 'package:codigo6_qr/ui/widgets/common_texfield_widget.dart';
@@ -91,6 +92,8 @@ class RegisterPage extends StatelessWidget {
               child: CommonButtonWidget(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    FocusScopeNode myFocusScope = FocusScope.of(context);
+                    myFocusScope.unfocus();
                     DateFormat myFormat = DateFormat("dd/MM/yyyy hh:mm");
                     String myDate = myFormat.format(DateTime.now());
 
@@ -100,23 +103,30 @@ class RegisterPage extends StatelessWidget {
                       url: "http://",
                       datetime: myDate,
                     );
-                    DBAdmin().insertQR(mantequilla).then((value) {
-                      if (value >= 0) {
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                        //Mostrar un snackbar
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: const Color(0xffbc00dd),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0),
+                    Future.delayed(const Duration(milliseconds: 400), () {
+                      DBAdmin().insertQR(mantequilla).then((value) {
+                        if (value >= 0) {
+                          // Navigator.pop(context);
+                          // Navigator.pop(context);
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                              (route) => false);
+                          //Mostrar un snackbar
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: const Color(0xffbc00dd),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16.0),
+                              ),
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                  "Se registró tu QR correctamente."),
                             ),
-                            behavior: SnackBarBehavior.floating,
-                            content:
-                                const Text("Se registró tu QR correctamente."),
-                          ),
-                        );
-                      }
+                          );
+                        }
+                      });
                     });
                   }
                 },
