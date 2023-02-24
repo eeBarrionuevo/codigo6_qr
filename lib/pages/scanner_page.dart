@@ -87,8 +87,8 @@ class _ScannerPageState extends State<ScannerPage> {
         children: [
           Expanded(
             flex: 4,
-            //child: _buildQrView(context),
-            child: SizedBox(),
+            child: _buildQrView(context),
+            // child: SizedBox(),
           ),
           Expanded(
             flex: 1,
@@ -116,12 +116,15 @@ class _ScannerPageState extends State<ScannerPage> {
                     height: 10.0,
                   ),
                   CommonButtonWidget(
-                    onPressed: !urlData.isNotEmpty
+                    onPressed: urlData.isNotEmpty
                         ? () {
+                            Navigator.pop(context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => RegisterPage()));
+                                    builder: (context) => RegisterPage(
+                                          url: urlData,
+                                        )));
                           }
                         : null,
                     text: "Registrar",
