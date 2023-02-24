@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.codigo6_qr">
    <application
-        android:label="codigo6_qr"
+        android:label="SaveQR"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
